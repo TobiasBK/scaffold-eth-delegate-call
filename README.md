@@ -1,14 +1,16 @@
-# How to understand Solidity's delegate call using Scaffold-ETH
+In progress...
 
-Scaffold-Eth is a powerful tool for developing a fullstack application fast. It allows you to quickly write Solidity code and vizualize the results. This loop allows for fast iteration and is ideal for learning.
+# Understand Solidity's delegatecall using Scaffold-ETH
 
-Today we will use Scaffold-eth to better undertand Solidity's delegatecall opcode.
+Scaffold-Eth is a powerful tool for developing fullstack applications fast. It allows you to easily vizualize the results of your Solidity code on the frontend. It's great for learning, allowing fast iteration.
+
+Today we'll use Scaffold-eth to better undertand the delegatecall method in Solidity.
 
 ## Introduction
 
 Solidity allows you to write smart contract code that can interact with the code of other smart contracts.
 
-In Solidity, we call this a message call.
+This contract-to-contract interation is known as a message call.
 
 Message calls are similar to transactions on the blockchain. Each call has:
 
@@ -19,39 +21,39 @@ Message calls are similar to transactions on the blockchain. Each call has:
 - Ether
 - return data
 
-Called contracts get a clean instants of memory plus access to the call payload (termed **calldata**).
+Called contracts get a clean memory plus access to the call payload (termed **calldata**).
 
 There is a special type of message call that uses the opcode `delegatecall`.
 
-There is only one difference between a normal `call` and `delegatecall`, but it is an important one:
+There is a big difference between regular `call` and `delegatecall`.
 
-**The code in the target contract is executed in the context of the calling contract.**
+When a `delegatecall` is used **the code in the target contract is executed in the context of the calling contract.**
 
-So, to clarify:
+To clarify:
 
-- `call`: When a contractX executes a `call` to contractY, contractY's code will be executed with **contractY's** own storage, msg.sender, and msg.value.
-- `delegatecall`: When a contractX executes a `delegatecall` to contractY, contractY's code will be executed with **contractX's** storage, msg.sender, and msg.value.
+- `call`: When contractX executes a `call` to contractY, contractY's code will be executed with **contractY's** own storage variables.
+- `delegatecall`: When a contractX executes a `delegatecall` to contractY, contractY's code will be executed with **contractX's** storage variables.
 
-The goal of this repo is to fully understand what this means using Solidity code examples and frontend visualization.
+The goal of this repo is to review what this means using Solidity code examples and frontend visualization.
 
 ## Code execution in the EVM environment
 
-Smart contracts executed in the Ethereum Virtual Machine (EVM), create a **context**.
+Smart contracts executed in the Ethereum Virtual Machine (EVM) create a **context**.
 
-The **context** is built from memory regions. Each region has a purpose, they are:
+The **context** is built from memory regions. Each region has a purpose:
 
 - Code: Where instructions are stored. The EVM reads and executes the code as bytes.
-- Stack: This is a list of 32-byte elements. The stack has maximum limit of 1024 values. Parameters are placed on the top of the stack. Only the top values are used.
-- Memory: This region only exists during code execution. It's not persistent.
-- Storage: This is the persitent memory of the contract.
-- Calldata: This data is sent with a transaction. This region is immutable.
-- Return data: This is used to return values after a call
+- Stack: List of 32-byte elements. The stack has maximum limit of 1024 values. Parameters are placed on the top of the stack. Only top values are used.
+- Memory: Only exists during code execution.
+- Storage: A contracts persitent memory.
+- Calldata: Data sent with a transaction, and immutable.
+- Return data: Returned values after a call.
 
 These memory regions together, called the **context**, are used differently in `call` and `delegatecall`.
 
 ## The code
 
-In `/packages/hardhat/contracts` you'll find two different smart contracts, called..
+In `/packages/hardhat/contracts` you'll find two different smart contracts...
 
 # 🏗 Scaffold-ETH
 
