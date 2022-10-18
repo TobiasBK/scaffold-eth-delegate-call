@@ -21,7 +21,7 @@ Message calls are similar to transactions on the blockchain. Each call has:
 - Ether
 - return data
 
-Called contracts get a clean memory plus access to the call payload (termed **calldata**).
+Called contracts get clean memory plus access to the call payload (termed **calldata**).
 
 There is a special type of message call that uses the opcode `delegatecall`.
 
